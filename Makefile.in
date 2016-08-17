@@ -1,0 +1,16 @@
+# /* Copyright Benjamin Welton 2015 */
+
+MAIN_DIR = @MAIN_DIR@
+
+all: dbscan 
+	echo "built all"
+
+dbscan:
+	cd $(MAIN_DIR)/src/dbscan ; \
+	$(MAKE) -f Makefile all ;
+
+install: dbscan_install
+
+dbscan_install:
+	cd $(MAIN_DIR)/src/dbscan ; \
+	$(MAKE) -f Makefile install ;

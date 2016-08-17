@@ -1,0 +1,20 @@
+
+NVCC=@NVCC@
+CUDA_INCLUDES = @CUDA_INCLUDES@
+OPTS = -std=c++11 -O4 -arch=sm_30
+PREFIX = ${DESTDIR}@prefix@
+LOCAL_INCLUDES = @BOOST_INCLUDES@ 
+LIBS=@BOOST_LIBS@ -lboost_date_time -ldl
+
+SOURCE_FILES = dbscan.cu
+
+HEADER_FILES = dbscan.h
+
+all: dbscan
+	echo "building all"
+
+dbscan:
+	$(NVCC) $(OPTS) $(CUDA_INCLUDES) $(SOURCE_FILES) $(LOCAL_INCLUDES) $(LIBS) -o ../../bin/cuda_dbscan 
+
+install: dbscan 
+	echo "Installed to $(PREFIX)/bin"
